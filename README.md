@@ -1,8 +1,6 @@
-fakebookmeteor
+pytamy
 ==============
-To fix this, we added Iron Router with
-mrt add iron-router
+Aplikacja na zaliczenie z logowaniem przez facebook API.
 
-Then we moved the main html content into a template named layout
-Then we adjusted the router.js file
+
 
