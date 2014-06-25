@@ -6,7 +6,7 @@ suite('submitAnswers', function() {
 
   test('server initialization', function(done, server) {
     server.eval(function() {
-      var collection = POSTS.find().fetch();
+      var collection = Posts.find().fetch();
       emit('collection', collection);
     }).once('collection', function(collection) {
       assert.equal(collection.length, 0);
