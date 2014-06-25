@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 
-suite('Test postów', function() {
+suite('submitAnswers', function() {
 
   test('server initialization', function(done, server) {
     server.eval(function() {
