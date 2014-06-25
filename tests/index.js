@@ -51,26 +51,6 @@ suite('submitAnswers', function() {
     });
   });
 
-  test('server update : OK', function(done, server, client) {
-    server.eval(function() {
-     Posts.update('1',{
-      $inc : {'yes':1},
-      $set: {'votedBy': '21sa124dsavr'}
-    });
-      var collection = Posts.find().fetch();
-      emit('collection', collection);
-    }).once('collection', function(collection) {
-      assert.equal(collection.length, 1);
-      done();
-    });
-
-    
-
-    client.once('collection', function(collection) {
-      assert.equal(Posts.find().fetch().length, 1);
-      done();
-    });
-  });
 
   
 
