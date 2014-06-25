@@ -25,6 +25,19 @@ suite('submitAnswers', function() {
       done();
     });
 
+    test('server update : OK', function(done, server, client) {
+    server.eval(function() {
+      Postsupdate(answerID,{
+        $inc : {'yes':1},
+        $set: {'votedBy': Meteor.userId()}
+      });
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 1);
+      done();
+    });
+    
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
