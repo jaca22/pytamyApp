@@ -1,0 +1,60 @@
+
+
+<template name="post">
+	<div class="media">
+		<div class="helper">
+	  <a class="pull-left" href="#">
+	  	
+	    	<img src="{{picture}}" class="media-object" data-src="holder.js/64x64">
+		
+	  </a>
+	  </div>
+	  <div class="media-body">
+	    <h6>{{owner}}</h6> 
+	    <p class="truncate">{{text}}</p>
+	    <a href="{{pathFor 'question' _id=this._id}}"><button type="button" href="{{pathFor 'question' _id=this._id}}" class="btn btn-primary">Odpowiedz ({{commentsCount}})</button></a>
+
+
+	  </div>
+	</div>
+</template>
+<template name="postcomment">
+	<li class="well">
+		<div class="helper">
+		<a class="pull-left" href="/user">
+			<img src="{{picture}}" class="media-object" alt="#" />
+		</a>
+	</div>
+		<p class="muted commentUser">{{owner}}</p>
+		<p class="muted commentText">{{text}}</p>
+		 <a class="btn btn-xs btn-success yes {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-up"></i> Dobra {{yes}}</a>
+      <a class="btn btn-xs btn-primary no {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-down"></i> Zła {{no}}</a>
+	</li>
+	
+</template>
+
+<template name="question">
+	<div class="media">
+		<div class="helper">
+	  <a class="pull-left" href="#">
+	    <img src="{{picture}}" class="media-object" data-src="holder.js/64x64">
+	  </a>
+	</div>
+	  <div class="media-body">
+	    <h6>{{owner}} <span>Liczba odpowiedzi: {{commentsCount}}</span></h6> 
+	    <p class="question">{{text}}</p>
+	    <div class="media">
+	    	<div class="form-group">
+		 <label for="posttext">Odpowiedz</label>
+		  <textarea class="form-control comment" value="" id="posttext" type="text"></textarea>
+		</div>
+			<ul class="unstyled">
+				{{#each postComments}}
+				{{>postcomment}}
+				{{/each}}	
+			</ul>
+		    
+	    </div>
+	  </div>
+	</div>
+</template>

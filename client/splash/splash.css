@@ -1,0 +1,55 @@
+
+.hero-unit {
+	width: 100%;
+	margin-top: 150px;
+	text-align: center;
+	background-color: none !important;
+	box-shadow:none !important;
+	background:none !important;
+
+}
+
+.hero-unit h1 {
+	font-weight:200;
+	color:#444;
+	font-size:64px;
+}
+
+.hero-unit h1 span {
+	font-weight:700;
+}
+
+.hero-unit p {
+	font-weight:200;
+	color:#444;
+	font-size:24px;
+}
+
+.sign-in-text-facebook {
+	background:#4C66A4;
+	padding:5px 10px;
+	color:#fff;
+	margin-top: 50px;
+	border-radius:6px;
+	cursor:pointer;
+	font-size: 20px;
+}
+
+#login-buttons-logout {
+	background:#4C66A4;
+	padding:5px 10px;
+	color:#fff;
+	margin-top: 50px;
+	border-radius:6px;
+	cursor:pointer;
+	width: 150px;
+margin: 50px auto 0px;
+margin-top: 30px;
+font-size: 20px;
+}
+
+.login-display-name {
+	color:#18BC9C;
+	font-weight:900;
+	margin-top: 20px;
+}

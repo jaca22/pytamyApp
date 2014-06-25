@@ -1,0 +1,28 @@
+textarea {
+	resize:none;
+}
+
+#postList {
+	padding-left:0px;
+}
+
+#postList .media {
+	background:rgba(249, 249, 249, 1);
+	border:1px solid #18BC9C;
+	padding:15px;
+	border-radius: 4px;
+}
+
+
+#postList .media h6 {
+font-weight: 700;
+font-size: 21px;
+margin-top: 9px;
+font-weight:500;
+margin-bottom: 18px;
+}
+
+
+.media-body h6 {
+	font-size: 21px;
+}

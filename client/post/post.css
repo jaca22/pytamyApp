@@ -1,0 +1,53 @@
+p.commentText{
+	margin-left:40px;
+	font-size:10pt;
+}
+p.commentUser{
+	margin-left:50px;
+}
+
+.unstyled {
+	list-style:none;
+}
+
+p.question {
+	color:rgba(156, 156, 156, 1);
+	clear: both;
+	margin-top: 63px;
+margin-bottom: 32px;
+}
+
+.truncate {
+	text-align:justify;
+	color: rgba(138, 138, 138, 1);
+}
+
+.btn-primary a {
+	color:#fff;
+}
+
+.media-body h6 {
+	float:left;
+	width:100%;
+}
+
+.media-body h6 span {
+	float:right;
+	margin:right:30px;
+}
+
+    .helper {
+    	height:80px;
+    	width:80px;
+    	overflow: hidden;
+    	border-radius:100px !important;
+    	margin-right:20px;
+        float:left;
+    }
+    img.media-object {
+    	max-width:82px !important;
+    }
+
+    .yes {
+    	margin-left: 71px;
+    }

@@ -1,0 +1,13 @@
+<template name="home">
+	<div class="well well-large">
+		<div class="form-group">
+		 <label for="posttext">Zadaj pytanie</label>
+		  <textarea class="form-control posttext" value="" id="posttext" type="text"></textarea>
+		</div>
+	</div>
+	<ul id="postList" class="unstyled">
+		{{#each posts}}
+		{{>post}}
+		{{/each}}
+	</ul>
+</template>
