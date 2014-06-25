@@ -27,7 +27,7 @@ suite('submitAnswers', function() {
 
     test('server update : OK', function(done, server, client) {
     server.eval(function() {
-      Postsupdate(answerID,{
+      Posts.update(answerID,{
         $inc : {'yes':1},
         $set: {'votedBy': Meteor.userId()}
       });
@@ -37,7 +37,7 @@ suite('submitAnswers', function() {
       assert.equal(collection.length, 1);
       done();
     });
-    
+
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
