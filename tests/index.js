@@ -15,7 +15,7 @@ suite('submitAnswers', function() {
   });
 
 
-  test('server insert : OK', function(done, server, client) {
+  test('insert : OK', function(done, server, client) {
     server.eval(function() {
       Posts.insert({commenttext: "testss"  });
       var collection = Posts.find().fetch();
