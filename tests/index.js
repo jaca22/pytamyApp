@@ -33,24 +33,7 @@ suite('Meteor App tests', function() {
     });
   });
 
-  test('using both client and the server', function(done, server, client) {
-  server.eval(function() {
-    Posts.find().observe({
-      added: addedNewPost
-    });
-
-    function addedNewPost(post) {
-      emit('post', post);
-    }
-  }).once('post', function(post) {
-    assert.equal(post.title, 'hello title');
-    done();
-  });
-
-  client.eval(function() {
-    Posts.insert({title: 'hello title'});
-  });
-});
+  
 
   test('server insert : OK', function(done, server, client) {
     server.eval(function() {
@@ -70,7 +53,30 @@ suite('Meteor App tests', function() {
     });
   });
 
-
+ltest('access granted for loggedin users', function(done, server, client) {
+server.eval(function() {
+Accounts.createUser({email: 'a@a.com', password: '123456'});
+emit('done');
+}).once('done', function() {
+server.eval(observeCollection);
+});
+function observeCollection() {
+Posts.find().observe({
+added: function(doc) {
+emit('added', doc);
+}
+});
+}
+server.once('added', function(doc) {
+assert.equal(doc.title, 'hello');
+done();
+});
+client.eval(function() {
+Meteor.loginWithPassword('a@a.com', '123456', function() {
+Posts.insert({title: 'hello'});
+});
+});
+});
   
 
 });
