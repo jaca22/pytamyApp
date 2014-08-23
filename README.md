@@ -4,5 +4,7 @@ pytamy
 ==============
 Aplikacja na zaliczenie z logowaniem przez facebook API.
 
+Link do aplikacji: <a href="http://pytamy.meteor.com/">Tutaj</a>
+
 
 
