@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 
-suite('submitAnswers', function() {
+suite('Meteor App tests', function() {
 
   test('server initialization', function(done, server) {
     server.eval(function() {
@@ -17,7 +17,7 @@ suite('submitAnswers', function() {
 
   test('insert : OK', function(done, server, client) {
     server.eval(function() {
-      Posts.insert({commenttext: "testss"  });
+      Posts.insert({commenttext: "tests"  });
       var collection = Posts.find().fetch();
       emit('collection', collection);
     }).once('collection', function(collection) {
