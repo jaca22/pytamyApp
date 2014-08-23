@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 
-suite('Meteor App tests', function() {
+suite('Meteor App test', function() {
 
   test('server initialization', function(done, server) {
     server.eval(function() {
