@@ -56,7 +56,7 @@ suite('Meteor App tests', function() {
       assert.equal(collection.length, 1);
       done();
     });
-    
+
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
@@ -66,14 +66,14 @@ suite('Meteor App tests', function() {
 
   test('server insert empty question : OK', function(done, server, client) {
     server.eval(function() {
-      Posts.insert({commenttext: " "  });
+      Posts.insert({commenttext: " "  }, {_id : 1});
       var collection = Posts.find().fetch();
       emit('collection', collection);
     }).once('collection', function(collection) {
       assert.equal(collection.length, 1);
       done();
     });
-    
+
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
@@ -83,7 +83,7 @@ suite('Meteor App tests', function() {
 
   test('vote : OK', function(done, server, client) {
     server.eval(function() {
-      Posts.update(answerID,{
+      Posts.update('1',{
         $inc : {'yes':1},
         $set: {'votedBy': Meteor.userId()}
       });
@@ -93,7 +93,7 @@ suite('Meteor App tests', function() {
       assert.equal(collection.length, 1);
       done();
     });
-    
+
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
