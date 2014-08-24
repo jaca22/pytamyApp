@@ -81,7 +81,7 @@ suite('Meteor App tests', function() {
     });
   });
 
-  test('vote : OK', function(done, server, client) {
+  test('client incrementYesVotes : OK', function(done, server, client) {
     server.eval(function() {
       var post = {
         text:"test",
@@ -95,6 +95,59 @@ suite('Meteor App tests', function() {
         $inc : {'yes':1},
         $set: {'votedBy': 1}
       });
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 1);
+      done();
+    });
+
+
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 1);
+      done();
+    });
+  });
+
+  test('client incrementNoVotes : OK', function(done, server, client) {
+    server.eval(function() {
+      var post = {
+        text:"test",
+        owner:"test",
+        date:new Date(),
+        picture:" ",
+        parent: 1
+      }
+      Posts.insert(post);
+      Posts.update(1,{
+        $inc : {'no':1},
+        $set: {'votedBy': 1}
+      });
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 1);
+      done();
+    });
+
+
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 1);
+      done();
+    });
+  });
+
+   test('client remove question : OK', function(done, server, client) {
+    server.eval(function() {
+      var post = {
+        text:"test",
+        owner:"test",
+        date:new Date(),
+        picture:" ",
+        parent: 1
+      }
+      Posts.remove({_id:1});
+     
       var collection = Posts.find().fetch();
       emit('collection', collection);
     }).once('collection', function(collection) {
