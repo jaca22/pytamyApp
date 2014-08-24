@@ -93,7 +93,7 @@ suite('Meteor App tests', function() {
       Posts.insert(post);
       Posts.update(1,{
         $inc : {'yes':1},
-        $set: {'votedBy': Meteor.userId()}
+        $set: {'votedBy': this.userId()}
       });
       var collection = Posts.find().fetch();
       emit('collection', collection);
