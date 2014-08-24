@@ -56,7 +56,7 @@ suite('Meteor App tests', function() {
       assert.equal(collection.length, 1);
       done();
     });
- 
+    
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
@@ -73,7 +73,7 @@ suite('Meteor App tests', function() {
       assert.equal(collection.length, 1);
       done();
     });
- 
+    
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
@@ -81,5 +81,27 @@ suite('Meteor App tests', function() {
     });
   });
 
+  test('vote : OK', function(done, server, client) {
+    server.eval(function() {
+      Posts.update(answerID,{
+        $inc : {'yes':1},
+        $set: {'votedBy': Meteor.userId()}
+      });
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 1);
+      done();
+    });
+    
+
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 1);
+      done();
+    });
+  });
+
+  
+
 });
- 
+
