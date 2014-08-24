@@ -25,15 +25,27 @@ suite('Meteor App tests', function() {
       done();
     });
 
-
-
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
     });
   });
 
+  test('client insert empty question : OK', function(done, server, client) {
+    server.eval(function() {
+      Posts.insert({commenttext: " "  });
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 1);
+      done();
+    });
 
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 1);
+      done();
+    });
+  });
 
   test('server insert : OK', function(done, server, client) {
     server.eval(function() {
@@ -44,8 +56,24 @@ suite('Meteor App tests', function() {
       assert.equal(collection.length, 1);
       done();
     });
+ 
 
-    
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 1);
+      done();
+    });
+  });
+
+  test('server insert empty question : OK', function(done, server, client) {
+    server.eval(function() {
+      Posts.insert({commenttext: " "  });
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 1);
+      done();
+    });
+ 
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
@@ -55,5 +83,3 @@ suite('Meteor App tests', function() {
 
 });
  
-
-});
