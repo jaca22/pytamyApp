@@ -35,7 +35,6 @@ Meteor.methods({
 			$set: {'votedBy': Meteor.userId()}
 		});
 
-
 	},
 	'incrementNoVotes' : function(answerID){
 		console.log(answerID);

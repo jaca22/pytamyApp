@@ -15,7 +15,7 @@ suite('Meteor App tests', function() {
   });
 
 
-  test('client insert : OK', function(done, server, client) {
+  test('client insert question : OK', function(done, server, client) {
     server.eval(function() {
       Posts.insert({commenttext: "tests"  });
       var collection = Posts.find().fetch();
@@ -47,7 +47,7 @@ suite('Meteor App tests', function() {
     });
   });
 
-  test('server insert : OK', function(done, server, client) {
+  test('server insert question: OK', function(done, server, client) {
     server.eval(function() {
       Posts.insert({commenttext: "testss"  });
       var collection = Posts.find().fetch();
