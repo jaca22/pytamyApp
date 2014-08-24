@@ -148,8 +148,8 @@ suite('Meteor App tests', function() {
       }
       Posts.insert(post);
       Posts.update(1,{
-        $inc : {'text':"test test"},
-        $set: {'text': "test test"}
+        $inc : {"parent":2},
+        $set: {"parent": 2}
       });
       var collection = Posts.find().fetch();
       emit('collection', collection);
@@ -174,6 +174,49 @@ suite('Meteor App tests', function() {
         parent: 1
       }
       Posts.remove({parent:1});
+     
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 0);
+      done();
+    });
+
+
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 0);
+      done();
+    });
+  });
+
+   test('server remove question : OK', function(done, server, client) {
+    server.eval(function() {
+      var post = {
+        text:"test",
+        owner:"test",
+        date:new Date(),
+        picture:" ",
+        parent: 1
+      }
+      Posts.remove({parent:1});
+     
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 0);
+      done();
+    });
+
+
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 0);
+      done();
+    });
+  });
+
+    test('client remove all question : OK', function(done, server, client) {
+    server.eval(function() {
+      Posts.remove({});
      
       var collection = Posts.find().fetch();
       emit('collection', collection);
