@@ -53,31 +53,6 @@ suite('Meteor App tests', function() {
     });
   });
 
-
- test('server remove : OK', function(done, server, client) {
-    server.eval(function() {
-      Posts.remove({_id: 1  });
-      var collection = Posts.find().fetch();
-      emit('collection', collection);
-    }).once('collection', function(collection) {
-      assert.equal(collection.length, 1);
-      done();
-    });
-
-    
-    client.once('collection', function(collection) {
-      assert.equal(Posts.find().fetch().length, 1);
-      done();
-    });
-  });
-
-test("can't create when not logged in", function(done, server, client) {
-console.log('here');
-var ret = client.evalSync(function() {
-emit('return', 'foo');
-});
-console.log(ret);
-done();
 });
  
 
