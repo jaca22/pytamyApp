@@ -137,7 +137,7 @@ suite('Meteor App tests', function() {
     });
   });
 
-   test('client remove question : OK', function(done, server, client) {
+  test('client update question : OK', function(done, server, client) {
     server.eval(function() {
       var post = {
         text:"test",
@@ -146,8 +146,11 @@ suite('Meteor App tests', function() {
         picture:" ",
         parent: 1
       }
-      Posts.remove({_id:1});
-     
+      Posts.insert(post);
+      Posts.update(1,{
+        $inc : {'text':"test test"},
+        $set: {'text': "test test"}
+      });
       var collection = Posts.find().fetch();
       emit('collection', collection);
     }).once('collection', function(collection) {
@@ -158,6 +161,31 @@ suite('Meteor App tests', function() {
 
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
+      done();
+    });
+  });
+
+   test('client remove question : OK', function(done, server, client) {
+    server.eval(function() {
+      var post = {
+        text:"test",
+        owner:"test",
+        date:new Date(),
+        picture:" ",
+        parent: 1
+      }
+      Posts.remove({parent:1});
+     
+      var collection = Posts.find().fetch();
+      emit('collection', collection);
+    }).once('collection', function(collection) {
+      assert.equal(collection.length, 0);
+      done();
+    });
+
+
+    client.once('collection', function(collection) {
+      assert.equal(Posts.find().fetch().length, 0);
       done();
     });
   });
