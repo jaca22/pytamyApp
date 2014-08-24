@@ -16,7 +16,7 @@ suite('Meteor App tests', function() {
 
 
   test('client insert question : OK', function(done, server, client) {
-    server.eval(function() {
+    client.eval(function() {
       Posts.insert({commenttext: "tests"  });
       var collection = Posts.find().fetch();
       emit('collection', collection);
@@ -32,7 +32,7 @@ suite('Meteor App tests', function() {
   });
 
   test('client insert empty question : OK', function(done, server, client) {
-    server.eval(function() {
+    client.eval(function() {
       Posts.insert({commenttext: " "  });
       var collection = Posts.find().fetch();
       emit('collection', collection);
@@ -58,7 +58,7 @@ suite('Meteor App tests', function() {
     });
 
 
-    client.once('collection', function(collection) {
+    server.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
     });
@@ -66,7 +66,7 @@ suite('Meteor App tests', function() {
 
   test('server insert empty question : OK', function(done, server, client) {
     server.eval(function() {
-      Posts.insert({commenttext: " "  }, {_id : 1});
+      Posts.insert({commenttext: " "  });
       var collection = Posts.find().fetch();
       emit('collection', collection);
     }).once('collection', function(collection) {
@@ -75,7 +75,7 @@ suite('Meteor App tests', function() {
     });
 
 
-    client.once('collection', function(collection) {
+    server.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
     });
@@ -83,7 +83,15 @@ suite('Meteor App tests', function() {
 
   test('vote : OK', function(done, server, client) {
     server.eval(function() {
-      Posts.update('1',{
+      var post = {
+        text:"test",
+        owner:"test",
+        date:new Date(),
+        picture:" ",
+        parent: 1
+      }
+      Posts.insert(post);
+      Posts.update(1,{
         $inc : {'yes':1},
         $set: {'votedBy': Meteor.userId()}
       });
