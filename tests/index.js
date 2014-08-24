@@ -158,7 +158,6 @@ suite('Meteor App tests', function() {
       done();
     });
 
-
     client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
