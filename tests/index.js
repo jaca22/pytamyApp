@@ -16,7 +16,7 @@ suite('Meteor App tests', function() {
 
 
   test('client insert question : OK', function(done, server, client) {
-    client.eval(function() {
+    server.eval(function() {
       Posts.insert({commenttext: "tests"  });
       var collection = Posts.find().fetch();
       emit('collection', collection);
@@ -32,7 +32,7 @@ suite('Meteor App tests', function() {
   });
 
   test('client insert empty question : OK', function(done, server, client) {
-    client.eval(function() {
+    server.eval(function() {
       Posts.insert({commenttext: " "  });
       var collection = Posts.find().fetch();
       emit('collection', collection);
@@ -58,7 +58,7 @@ suite('Meteor App tests', function() {
     });
 
 
-    server.once('collection', function(collection) {
+   client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
     });
@@ -75,7 +75,7 @@ suite('Meteor App tests', function() {
     });
 
 
-    server.once('collection', function(collection) {
+    client.once('collection', function(collection) {
       assert.equal(Posts.find().fetch().length, 1);
       done();
     });
